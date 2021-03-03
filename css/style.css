@@ -1,7 +1,8 @@
 #desk {
     position: relative;
-    background-color: #ccc;
+    background-color: rgb(149, 149, 149);
     margin: auto;
+    padding: 10px;
     width: 800px;
     height: 800px;
     display: grid;

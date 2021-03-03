@@ -81,23 +81,20 @@ positions.forEach(item => {
             col: col,
             row: row,
             pos: pos
-        }
+        };
     };
 
-    if (turn === false && item.class === 'inactive') {
-        player.addEventListener('click', ( ) => {
+    player.addEventListener('click', () => {
+        if (turn === true && item.class === 'inactive') {
             const {col, row, pos} = moveEnd();
             player.classList.replace(item.class, pos);
             console.log(col, row, pos);
-        });
-    }
-
-    if (turn === false && item.class === 'active') {
-        player.addEventListener('click', () => {
-            turn = false;
+        } else if (turn === false && item.class === 'active') {
             moveStart(item.collumn, item.row, item.class);
+            turn = true;
+        } else if (turn === true && item.class === 'active') {
             console.log(turn);
-        });
-    }
+        }
+    });
     table.append(player);
 });
