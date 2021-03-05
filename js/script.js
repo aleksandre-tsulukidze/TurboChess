@@ -2,6 +2,7 @@ const table = document.querySelector('#desk');
 
 let positions = [];
 let turn = false;
+let counter = 0;
 let playing = {
     'col': 0,
     'row': 0,
@@ -10,91 +11,54 @@ let playing = {
 
 
 for (let key = 1; key <= 8; key++) {
-    if (key == 1) {
-        for (let index = 1; index <= 8; index++) {
-            let position = {
-                'collumn': index,
-                'row': key,
-                'class': 'active'
-            };
-            positions.push(position);
-        }
-    } else if (key == 2) {
-        for (let index = 1; index <= 8; index++) {
-            let position = {
-                'collumn': index,
-                'row': key,
-                'class': 'active'
-            };
-            positions.push(position);
-        }
-    } else if (key == 7) {
-        for (let index = 1; index <= 8; index++) {
-            let position = {
-                'collumn': index,
-                'row': key,
-                'class': 'active'
-            };
-            positions.push(position);
-        }
-    } else if (key == 8) {
-        for (let index = 1; index <= 8; index++) {
-            let position = {
-                'collumn': index,
-                'row': key,
-                'class': 'active'
-            };
-            positions.push(position);
-        }
-    } else {
-        for (let index = 1; index <= 8; index++) {
-            let position = {
-                'collumn': index,
-                'row': key,
-                'class': 'inactive'
-            };
-            positions.push(position);
-        }
+    for (let index = 1; index <= 8; index++) {
+        let position = {
+            'collumn': index,
+            'row': key,
+        };
+        positions.push(position);
     }
 }
-
 
 positions.forEach(item => {
     const player = document.createElement('div');
 
-    player.style.gridColumn = item.collumn;
-    player.style.gridRow = item.row;
-    player.classList.add(item.class);
+    if (item.row === 1 || item.row === 2 || item.row === 7 || item.row === 8) {
+        player.style.gridColumn = item.collumn;
+        player.style.gridRow = item.row;
+        player.classList.add('active');
+    } else {
+        player.style.gridColumn = item.collumn;
+        player.style.gridRow = item.row;
+        player.classList.add('inactive');
+    }
 
-    const moveStart = (col, row, pos) => {
-        playing.col = col;
-        playing.row = row;
-        playing.class = pos;
+    
+
+    const moveStart = () => {
+        player.classList.replace('active', 'inactive');
     };
     
     const moveEnd = () => {
-        const col = playing.col;
-        const row = playing.row;
-        const pos = playing.class;
-        turn = false;
-        return {
-            col: col,
-            row: row,
-            pos: pos
-        };
+        player.classList.replace('inactive', 'active');
+        counter ++;
+        console.log(counter);
     };
 
     player.addEventListener('click', () => {
-        if (turn === true && item.class === 'inactive') {
-            const {col, row, pos} = moveEnd();
-            player.classList.replace(item.class, pos);
-            console.log(col, row, pos);
-        } else if (turn === false && item.class === 'active') {
-            moveStart(item.collumn, item.row, item.class);
-            turn = true;
-        } else if (turn === true && item.class === 'active') {
-            console.log(turn);
+        for (let cssClass of player.classList) {
+            playing.class = cssClass;
+            if (playing.class === 'active' && turn === false) {
+                console.log('moveStart');
+                moveStart();
+                turn = true;
+            } else if (playing.class === 'inactive' && turn === true ) {
+                moveEnd();
+                turn = false;
+                console.log('moveEnd');
+            }
         }
     });
+    
     table.append(player);
 });
