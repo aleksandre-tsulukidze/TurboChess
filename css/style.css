@@ -2,17 +2,103 @@ body {
     background-color: #0D0D0D;
 }
 
+.body {
+    display: flex;
+    justify-content: space-between;
+}
+
 #desk {
-    position: relative;
     background-color: rgb(93, 93, 93);
-    margin: auto;
-    padding: 10px;
+    margin: 0 auto;
     width: 800px;
     height: 800px;
     display: grid;
     grid-template-columns: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr; 
     grid-template-rows: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
     grid-gap: 10px;
+}
+
+.sidebar {
+    position: flex;
+    justify-content: top;
+    width: 20%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    max-height: 800px;
+    overflow-y: auto;
+
+    box-shadow: 1px 5px 20px black;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: black; 
+  }
+   
+
+::-webkit-scrollbar-thumb {
+    background: #2A5FE7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94aff2 ;
+}
+
+.sidebar_header {
+    color: white;
+    padding: 0.5rem 0;
+    text-align: center; 
+    font-size: 2.5rem; 
+    margin-bottom: 10px;
+
+    border-bottom: 1px solid #000;
+}
+
+.sidebar ul {
+    list-style: decimal;
+    list-style-position: inside;
+}
+
+.sidebar li {
+    padding: 0.8rem 0;
+    font-size: 1.2rem;
+}
+
+.whiteish::after {
+    content:"" ;
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: white;
+
+    margin-left: 20%;
+}
+
+.inactiveish {
+    background-color: orange;
+}
+
+.blackish::after {
+    content:"" ;
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: black;
+
+    margin-left: 20%;
+}
+
+.whiteishKill::after {
+    content:"Killed " ;
+    display: inline-block;
+    width: 4rem;
+    height: 1.2rem;
+
+    margin-left: 20%;
 }
 
 .inactive {
